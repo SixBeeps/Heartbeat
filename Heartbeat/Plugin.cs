@@ -27,7 +27,7 @@ namespace Heartbeat {
         /// <summary>
         /// TODO: assign a plugin version.
         /// </summary>
-        private const int PluginVersion = 0002;
+        private const int PluginVersion = 0003;
         /// <summary>
         /// TODO: what type of plugin are your making?
         /// </summary>
@@ -58,7 +58,8 @@ namespace Heartbeat {
             services.AddSingleton<PluginParameters>()
                 .AddSingletonAll<PluginPrograms>()
                 .AddSingletonAll<AudioProcessor>()
-                .AddSingletonAll<PluginEditor>();
+                .AddSingletonAll<PluginEditor>()
+                .AddSingletonAll<MidiWatch>();
         }
 
         public static int GetVersion() {

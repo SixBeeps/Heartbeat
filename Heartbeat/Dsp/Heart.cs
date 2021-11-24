@@ -37,7 +37,6 @@ namespace Heartbeat.Dsp {
         /// <param name="sample">A single sample.</param>
         /// <returns>Returns the new value for the sample.</returns>
         public float ProcessSample(float sample, float beatProgress) {
-
             float pumpPercent = _parameters.PumpAmtMgr.CurrentValue / 100f;
             float tension = _parameters.TensionMgr.CurrentValue / 10f;
             bool flip = _parameters.DirectionMgr.CurrentValue > 0.5f;

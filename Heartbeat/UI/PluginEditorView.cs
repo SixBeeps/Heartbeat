@@ -161,6 +161,7 @@ namespace Heartbeat.UI {
 
         private void aboutBtn_Click(object sender, System.EventArgs e) {
             MessageBox.Show($"Heartbeat - Volume LFO plugin by SixBeeps\n\nv{Plugin.GetVersion()}", "About Heartbeat", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(string.Join(", ", MidiWatch.AllEvents));
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e) {

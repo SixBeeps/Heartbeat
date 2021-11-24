@@ -24,7 +24,7 @@ namespace Heartbeat {
         private const int InitialTailSize = 0;
 
         // TODO: change this to your specific needs.
-        private readonly VstTimeInfoFlags _defaultTimeInfoFlags = VstTimeInfoFlags.PpqPositionValid;
+        private readonly VstTimeInfoFlags _defaultTimeInfoFlags = VstTimeInfoFlags.PpqPositionValid | VstTimeInfoFlags.TransportPlaying;
         // set after the plugin is opened
         private IVstHostSequencer? _sequencer;
 
@@ -106,9 +106,15 @@ namespace Heartbeat {
         }
 
         // process a single audio channel
-        private void Process(Heart delay, VstAudioBuffer input, VstAudioBuffer output) {
+        private void Process(Heart heart, VstAudioBuffer input, VstAudioBuffer output) {
+            // Bypass heartbeats if not currently playing
+            /*if (_timeInfo == null || (uint)(_timeInfo.Flags & VstTimeInfoFlags.TransportPlaying) == 0) {
+                input.CopyTo(output);
+                return;
+            }*/
+
             for (int i = 0; i < input.SampleCount; i++) {
-                output[i] = delay.ProcessSample(input[i], GetBeatProgress(delay.GetBeatParams()));
+                output[i] = heart.ProcessSample(input[i], GetBeatProgress(heart.GetBeatParams()));
             }
         }
 
